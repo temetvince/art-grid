@@ -1,3 +1,3 @@
-# Typescript Electron Starter
+# Art Grid
 
-Starter project for TS, Electron, and React.
+Puts an image onto a grid, then shows the grid piece by piece for drawing reference.
