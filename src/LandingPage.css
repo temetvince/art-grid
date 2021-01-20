@@ -151,6 +151,16 @@
    color: var(--secondary-color);
 }
 
+/*Inputs*/
+.inputNumber {
+   background: var(--global-dark);
+   color: var(--primary-color);
+   border: var(--primary-color) var(--border-size) solid;
+   border-radius: var(--box-rounding);
+   padding: var(--spacing-half) var(--spacing);
+   margin: var(--spacing-half) var(--spacing-half);
+}
+
 /*Background Colors*/
 .light {
    background: var(--global-light);
