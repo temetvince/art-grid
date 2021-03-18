@@ -18,6 +18,9 @@ function App(): JSX.Element {
                   <GridPage {...(props.location.state as GridPageProps)} />
                )}
             />
+            <Route path="/Landing">
+               <LandingPage />
+            </Route>
             <Route path="*">
                <ErrorPage />
             </Route>

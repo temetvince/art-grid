@@ -22,10 +22,6 @@ module.exports = {
 
       // Uses the recommended rules for React
       "plugin:react/recommended",
-
-      // Turn off styling rules handled by Prettier
-      // MUST BE LISTED LAST in order to override successfully
-      "prettier/@typescript-eslint",
    ],
    overrides: [
       {

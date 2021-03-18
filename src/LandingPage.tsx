@@ -22,13 +22,11 @@ class LandingPage extends React.Component<unknown, State> {
    };
 
    filePicked = (): void => {
-      dialog
-         .showOpenDialog({ properties: ["openFile"] })
-         .then((r: Record<string, unknown>) => {
-            const paths = r.filePaths as Array<string>;
-            const base64 = fs.readFileSync(paths[0]).toString("base64");
-            this.setState({ file: base64 });
-         });
+      dialog.showOpenDialog({ properties: ["openFile"] }).then((r) => {
+         const paths = r.filePaths as Array<string>;
+         const base64 = fs.readFileSync(paths[0]).toString("base64");
+         this.setState({ file: base64 });
+      });
    };
 
    render(): JSX.Element {
