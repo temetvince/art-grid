@@ -78,6 +78,10 @@
    align-self: stretch;
 }
 
+.flex-justify {
+   justify-content: space-evenly;
+}
+
 .grow-one-column {
    align-self: stretch;
    flex-basis: 0;
