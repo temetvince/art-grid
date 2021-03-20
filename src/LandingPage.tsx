@@ -74,7 +74,7 @@ class LandingPage extends React.Component<unknown, State> {
 
                      <div className="grow-one-column flex-column content">
                         <div className="grow-one-column">
-                           <div className="flex-column">
+                           <div className="flex-column flex-stretch">
                               <div className="grow-one-column">
                                  Grid size (width):
                               </div>
@@ -98,9 +98,10 @@ class LandingPage extends React.Component<unknown, State> {
                               />
                            </div>
                         </div>
-                        <div className="btn text-md" onClick={this.filePicked}>
-                           Pick an image
-                        </div>
+                     </div>
+
+                     <div className="btn text-md" onClick={this.filePicked}>
+                        Pick an image
                      </div>
 
                      <div className="grow-one-column flex-column content">
