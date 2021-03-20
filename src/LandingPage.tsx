@@ -6,15 +6,17 @@ import { Redirect } from "react-router-dom";
 const dialog = window.require("electron").remote.dialog;
 const fs = window.require("fs");
 
+const hiddenClass = "hidden";
+
 interface State {
    redirect: boolean;
-   file: string;
+   file: string | undefined;
 }
 
 class LandingPage extends React.Component<unknown, State> {
    constructor(props: Readonly<unknown> | unknown) {
       super(props);
-      this.state = { redirect: false, file: "" };
+      this.state = { redirect: false, file: undefined };
    }
 
    submitted = (): void => {
@@ -24,12 +26,41 @@ class LandingPage extends React.Component<unknown, State> {
    filePicked = (): void => {
       dialog.showOpenDialog({ properties: ["openFile"] }).then((r) => {
          const paths = r.filePaths as Array<string>;
-         const base64 = fs.readFileSync(paths[0]).toString("base64");
-         this.setState({ file: base64 });
+
+         if (paths && paths[0]) {
+            const base64 = fs.readFileSync(paths[0]).toString("base64");
+            this.setState({ file: base64 });
+         }
       });
    };
 
+   show = (element: HTMLElement | null): void => {
+      if (!element) return;
+
+      if (this.isHidden(element)) {
+         element.classList.remove(hiddenClass);
+      }
+   };
+
+   hide = (element: HTMLElement | null): void => {
+      if (!element) return;
+
+      if (!this.isHidden(element)) {
+         element.classList.add(hiddenClass);
+      }
+   };
+
+   isHidden = (element: HTMLElement): boolean => {
+      return element.classList.contains(hiddenClass);
+   };
+
    render(): JSX.Element {
+      if (!this.state.file) {
+         this.hide(document.getElementById("Submit"));
+      } else {
+         this.show(document.getElementById("Submit"));
+      }
+
       if (this.state.redirect) {
          const width = (document.getElementById("width") as HTMLInputElement)
             .value;
@@ -104,7 +135,10 @@ class LandingPage extends React.Component<unknown, State> {
                         Pick an image
                      </div>
 
-                     <div className="grow-one-column flex-column content">
+                     <div
+                        id="Submit"
+                        className="grow-one-column flex-column content hidden"
+                     >
                         <div className="btn text-md" onClick={this.submitted}>
                            Submit
                         </div>
