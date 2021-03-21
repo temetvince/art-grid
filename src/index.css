@@ -44,6 +44,7 @@
 
 .content {
    padding: var(--spacing) 0;
+   max-width: 500px;
 }
 
 /*Div styles*/
@@ -84,34 +85,34 @@
 
 .grow-one-column {
    align-self: stretch;
-   flex-basis: 0;
+   flex-basis: content;
    flex-grow: 1;
 }
 
 .grow-two-column {
    align-self: stretch;
-   flex-basis: 0;
+   flex-basis: content;
    flex-grow: 2;
 }
 
 .grow-three-column {
    align-self: stretch;
-   flex-basis: 0;
+   flex-basis: content;
    flex-grow: 3;
 }
 
 .grow-one-row {
-   flex-basis: 0;
+   flex-basis: content;
    flex-grow: 1;
 }
 
 .grow-two-row {
-   flex-basis: 0;
+   flex-basis: content;
    flex-grow: 2;
 }
 
 .grow-three-row {
-   flex-basis: 0;
+   flex-basis: content;
    flex-grow: 3;
 }
 
@@ -260,6 +261,12 @@ img {
 
 hr {
    width: 75%;
+}
+
+input,
+textarea {
+   width: 100%;
+   display: block;
 }
 
 /*Media Queries*/
