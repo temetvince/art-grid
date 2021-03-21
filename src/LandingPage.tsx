@@ -62,18 +62,11 @@ class LandingPage extends React.Component<unknown, State> {
       }
 
       if (this.state.redirect) {
-         const width = (document.getElementById("width") as HTMLInputElement)
-            .value;
-         const height = (document.getElementById("height") as HTMLInputElement)
-            .value;
-
          return (
             <Redirect
                to={{
                   pathname: "/GridPage",
                   state: {
-                     width: width,
-                     height: height,
                      file: this.state.file,
                   },
                }}
@@ -83,71 +76,31 @@ class LandingPage extends React.Component<unknown, State> {
 
       return (
          <main>
-            <div className="root flex-row">
-               <div className="grow-one-row flex-stretch" />
+            <div className="root flex-column flex-justify">
+               <div className="container flex-column rounded">
+                  <div className="content">
+                     <div className="text-xl">Welcome to Art Grid</div>
+                  </div>
 
-               <div className="grow-three-column flex-stretch flex-column">
-                  <div className="grow-one-column" />
+                  <div className="content">
+                     <i>
+                        Art Grid is an art tool which takes an image and puts it
+                        inside a grid. The grid can be turned upside down and
+                        sliced up. Each grid box can be shown in random order
+                        for drawing purposes.
+                     </i>
+                  </div>
 
-                  <div className="grow-two-column flex-column container rounded">
-                     <div className="grow-one-column content">
-                        <div className="text-xl">Welcome to Art Grid</div>
-                     </div>
+                  <div className="btn text-md" onClick={this.filePicked}>
+                     Pick an image
+                  </div>
 
-                     <div className="grow-three-column content">
-                        <i>
-                           Art Grid is an art tool which takes an image and puts
-                           it inside a grid. The grid can be turned upside down
-                           and sliced up. Each grid box can be shown in random
-                           order for drawing purposes.
-                        </i>
-                     </div>
-
-                     <div className="grow-one-column flex-column content">
-                        <div className="grow-one-column">
-                           <div className="flex-column flex-stretch">
-                              <div className="grow-one-column">
-                                 Grid size (width):
-                              </div>
-                              <div className="grow-one-column">
-                                 Grid size (height):
-                              </div>
-                           </div>
-
-                           <div className="flex-column">
-                              <input
-                                 id="width"
-                                 type="number"
-                                 defaultValue="10"
-                                 className="inputNumber"
-                              />
-                              <input
-                                 id="height"
-                                 type="number"
-                                 defaultValue="10"
-                                 className="inputNumber"
-                              />
-                           </div>
-                        </div>
-                     </div>
-
-                     <div className="btn text-md" onClick={this.filePicked}>
-                        Pick an image
-                     </div>
-
-                     <div
-                        id="Submit"
-                        className="grow-one-column flex-column content hidden"
-                     >
-                        <div className="btn text-md" onClick={this.submitted}>
-                           Submit
-                        </div>
+                  <div id="Submit" className="flex-column hidden">
+                     <div className="btn text-md" onClick={this.submitted}>
+                        Submit
                      </div>
                   </div>
-                  <div className="grow-one-column" />
                </div>
-
-               <div className="grow-one-row flex-stretch" />
             </div>
          </main>
       );

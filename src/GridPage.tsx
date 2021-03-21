@@ -1,36 +1,54 @@
+import "./GridPage.css";
+
 import React from "react";
 import { Redirect } from "react-router-dom";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { PNG, resize } from "resize-image";
-import { GridSizes, GridSize } from "./GridSizes";
 
 const Y = 0;
 const X = 0;
 const PRINT_SIZE = 500;
-const SQUARE_SIZE = 30;
 
 export interface GridPageProps {
-   width: number;
-   height: number;
    file: string;
 }
 
 interface State {
    redirect: boolean;
    grid: HTMLCanvasElement[];
-   sizes: GridSize[];
+   squareSize: number;
+   image: HTMLImageElement;
 }
 
 class GridPage extends React.Component<GridPageProps, State> {
    constructor(props: GridPageProps) {
       super(props);
-      this.state = { redirect: false, grid: [], sizes: [] };
-      this.setupImage(new Image());
+      this.state = {
+         redirect: false,
+         grid: [],
+         squareSize: 1,
+         image: new Image(),
+      };
+      this.setupImage(this.state.image);
    }
 
    buttonClicked = (): void => {
       this.setState({ redirect: true });
+   };
+
+   submitted = (): void => {
+      const size = Number(
+         (document.getElementById("numberOfSquares") as HTMLInputElement).value
+      );
+
+      if (size < 1) {
+         return;
+      }
+
+      this.setState({ squareSize: size }, () => {
+         this.run(this.state.image);
+      });
    };
 
    setupImage = (image: HTMLImageElement): HTMLImageElement => {
@@ -51,12 +69,20 @@ class GridPage extends React.Component<GridPageProps, State> {
          | ImageBitmap
          | OffscreenCanvas
    ): void => {
+      const boxWidthInPX = Math.floor(
+         (image.width as number) / this.state.squareSize
+      );
+      const boxHeightInPx = Math.floor(
+         (image.height as number) / this.state.squareSize
+      );
+      const lowest = Math.min(boxHeightInPx, boxWidthInPX);
+
       // create a canvas
       const canvas = document.createElement("canvas");
 
-      //set its size to match the image
-      canvas.width = image.width as number;
-      canvas.height = image.height as number;
+      //set its size to match the grid
+      canvas.width = boxWidthInPX * this.state.squareSize;
+      canvas.height = boxHeightInPx * this.state.squareSize;
 
       // get the 2d interface
       const ctx = canvas.getContext("2d");
@@ -64,95 +90,26 @@ class GridPage extends React.Component<GridPageProps, State> {
       // draw the image on the canvas
       ctx?.drawImage(image, 0, 0);
 
-      // get the tile size
-      const gcdenom = this.findGDC(canvas.width, canvas.height);
-      const factors = this.factorize(gcdenom).reverse();
-      const widthSizes = this.divideArray(factors, canvas.width);
-      const heightSizes = this.divideArray(factors, canvas.height);
-
-      //print sizes to console
-      const newSizes: GridSize[] = [];
-      for (let i = 0; i < widthSizes.length; i++) {
-         const gridSize = {
-            width: widthSizes[i],
-            height: heightSizes[i],
-            size: factors[i],
-         };
-
-         if (!newSizes.includes(gridSize)) {
-            newSizes.push(gridSize);
-         }
-
-         const display =
-            "Grid: " +
-            widthSizes[i] +
-            " x " +
-            heightSizes[i] +
-            " => " +
-            factors[i] +
-            "px";
-         console.log(display);
-      }
-
-      this.setState({ sizes: newSizes });
-
-      this.gridify(canvas, ctx);
-   };
-
-   findGDC = (n1: number, n2: number): number => {
-      let x = Math.abs(n1);
-      let y = Math.abs(n2);
-
-      while (y) {
-         const t = y;
-         y = x % y;
-         x = t;
-      }
-
-      return x;
-   };
-
-   factorize = (number: number): Array<number> => {
-      const result = [];
-
-      for (let i = 1; i <= number; i++) {
-         if (number % i) continue;
-         result.push(i);
-      }
-
-      return result;
-   };
-
-   divideArray = (factors: Array<number>, number: number): Array<number> => {
-      const result: number[] = [];
-
-      factors.forEach((factor) => {
-         result.push(this.divide(factor, number));
-      });
-
-      return result;
-   };
-
-   divide = (n1: number, n2: number): number => {
-      return n2 > n1 ? n2 / n1 : n1 / n2;
+      this.gridify(canvas, ctx, lowest);
    };
 
    gridify = (
       canvas: HTMLCanvasElement,
-      ctx: CanvasRenderingContext2D | null
+      ctx: CanvasRenderingContext2D | null,
+      squareSize: number
    ): void => {
       let x, y;
 
       const grid2: HTMLCanvasElement[][] = [];
       // for each tile
-      for (y = 0; y < canvas.height; y += SQUARE_SIZE) {
+      for (y = 0; y < canvas.height; y += squareSize) {
          const grid: HTMLCanvasElement[] = [];
-         for (x = 0; x < canvas.width; x += SQUARE_SIZE) {
+         for (x = 0; x < canvas.width; x += squareSize) {
             // get the pixel data
-            const imgData = ctx?.getImageData(x, y, SQUARE_SIZE, SQUARE_SIZE);
+            const imgData = ctx?.getImageData(x, y, squareSize, squareSize);
             const canvas2 = document.createElement("canvas");
-            canvas2.width = SQUARE_SIZE;
-            canvas2.height = SQUARE_SIZE;
+            canvas2.width = squareSize;
+            canvas2.height = squareSize;
             const ctx2 = canvas2.getContext("2d");
             if (imgData) {
                ctx2?.putImageData(imgData, 0, 0);
@@ -177,14 +134,35 @@ class GridPage extends React.Component<GridPageProps, State> {
 
       return (
          <main>
-            <div className="root flex-column">
-               <div className="flex-row">
-                  <div className="btn text-md" onClick={this.buttonClicked}>
-                     Start Over
+            <div className="root flex-column flex-justify">
+               <div className="container flex-column rounded">
+                  <img id="resized" alt="" />
+
+                  <div className="content">
+                     <div className="flex-row flex-stretch">
+                        <div className="flex-stretch">
+                           Grid size (squares on shortest side):
+                        </div>
+
+                        <input
+                           id="numberOfSquares"
+                           type="number"
+                           defaultValue="1"
+                           className="inputNumber"
+                        />
+
+                        <div className="btn" onClick={this.submitted}>
+                           Apply
+                        </div>
+                     </div>
                   </div>
-                  <GridSizes gridSizes={this.state.sizes} />
+
+                  <div className="flex-row flex-stretch flex-justify">
+                     <div className="btn text-md" onClick={this.buttonClicked}>
+                        Start Over
+                     </div>
+                  </div>
                </div>
-               <img id="resized" alt="" />
             </div>
          </main>
       );
