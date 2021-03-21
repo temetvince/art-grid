@@ -92,6 +92,7 @@ class LandingPage extends React.Component<unknown, State> {
                   </div>
 
                   <div className="btn text-md" onClick={this.filePicked}>
+                     <i className="fas fa-camera" />
                      Pick an image
                   </div>
 

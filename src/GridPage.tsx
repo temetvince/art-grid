@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { PNG, resize } from "resize-image";
+import GridSize from "./GridSize";
 
 const Y = 0;
 const X = 0;
@@ -17,7 +18,7 @@ export interface GridPageProps {
 interface State {
    redirect: boolean;
    grid: HTMLCanvasElement[];
-   squareSize: number;
+   gridSize: number;
    image: HTMLImageElement;
 }
 
@@ -27,7 +28,7 @@ class GridPage extends React.Component<GridPageProps, State> {
       this.state = {
          redirect: false,
          grid: [],
-         squareSize: 1,
+         gridSize: 1,
          image: new Image(),
       };
       this.setupImage(this.state.image);
@@ -37,16 +38,12 @@ class GridPage extends React.Component<GridPageProps, State> {
       this.setState({ redirect: true });
    };
 
-   submitted = (): void => {
-      const size = Number(
-         (document.getElementById("numberOfSquares") as HTMLInputElement).value
-      );
-
+   submitted = (size: number): void => {
       if (size < 1) {
          return;
       }
 
-      this.setState({ squareSize: size }, () => {
+      this.setState({ gridSize: size }, () => {
          this.run(this.state.image);
       });
    };
@@ -70,10 +67,10 @@ class GridPage extends React.Component<GridPageProps, State> {
          | OffscreenCanvas
    ): void => {
       const boxWidthInPX = Math.floor(
-         (image.width as number) / this.state.squareSize
+         (image.width as number) / this.state.gridSize
       );
       const boxHeightInPx = Math.floor(
-         (image.height as number) / this.state.squareSize
+         (image.height as number) / this.state.gridSize
       );
       const lowest = Math.min(boxHeightInPx, boxWidthInPX);
 
@@ -81,8 +78,8 @@ class GridPage extends React.Component<GridPageProps, State> {
       const canvas = document.createElement("canvas");
 
       //set its size to match the grid
-      canvas.width = boxWidthInPX * this.state.squareSize;
-      canvas.height = boxHeightInPx * this.state.squareSize;
+      canvas.width = boxWidthInPX * this.state.gridSize;
+      canvas.height = boxHeightInPx * this.state.gridSize;
 
       // get the 2d interface
       const ctx = canvas.getContext("2d");
@@ -139,22 +136,7 @@ class GridPage extends React.Component<GridPageProps, State> {
                   <img id="resized" alt="" />
 
                   <div className="content">
-                     <div className="flex-row flex-stretch">
-                        <div className="flex-stretch">
-                           Grid size (squares on shortest side):
-                        </div>
-
-                        <input
-                           id="numberOfSquares"
-                           type="number"
-                           defaultValue="1"
-                           className="inputNumber"
-                        />
-
-                        <div className="btn" onClick={this.submitted}>
-                           Apply
-                        </div>
-                     </div>
+                     <GridSize callback={this.submitted} />
                   </div>
 
                   <div className="flex-row flex-stretch flex-justify">

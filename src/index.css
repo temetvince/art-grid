@@ -83,6 +83,10 @@
    justify-content: space-evenly;
 }
 
+.flex-space-between {
+   justify-content: space-between;
+}
+
 .grow-one-column {
    align-self: stretch;
    flex-basis: content;
@@ -212,7 +216,7 @@
 /*Global*/
 * {
    box-sizing: border-box;
-   min-width: min-content;
+   min-width: auto;
    min-height: min-content;
    margin: 0;
    padding: 0;
@@ -266,7 +270,12 @@ hr {
 input,
 textarea {
    width: 100%;
-   display: block;
+   background: var(--global-dark);
+   color: var(--primary-color);
+   border: var(--primary-color) var(--border-size) solid;
+   border-radius: var(--box-rounding);
+   padding: var(--spacing-half) var(--spacing-half);
+   margin: var(--spacing-half) var(--spacing-half);
 }
 
 /*Media Queries*/
