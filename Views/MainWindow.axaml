@@ -16,15 +16,39 @@
     </Design.DataContext>
 
     <Panel>
-        <Image Width="Infinity"
-               Height="Infinity"
+        <Image Width="500"
+               Height="500"
                Source="{Binding GetImage}" />
-        <Panel HorizontalAlignment="Center" VerticalAlignment="Bottom">
-            <Button Content="{Binding ImageTitle}"
-                    Command="{Binding PickFile}"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
+        <Grid
+            ColumnDefinitions="Auto Auto"
+            RowDefinitions="Auto"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Bottom">
+            <Button
+                Content="{Binding ImageTitle}"
+                Command="{Binding PickFile}"
+                Margin="20" />
+            <Grid Grid.Column="1"
+                  ColumnDefinitions="Auto Auto Auto Auto"
+                  RowDefinitions="Auto"
+                  VerticalAlignment="Bottom">
+                <Button
+                    Content="{Binding UpTitle}"
+                    Command="{Binding Up}"
                     Margin="20" />
-        </Panel>
+                <Button Grid.Column="1"
+                        Content="{Binding DownTitle}"
+                        Command="{Binding Down}"
+                        Margin="20" />
+                <Button Grid.Column="2"
+                        Content="{Binding LeftTitle}"
+                        Command="{Binding Left}"
+                        Margin="20" />
+                <Button Grid.Column="3"
+                        Content="{Binding RightTitle}"
+                        Command="{Binding Right}"
+                        Margin="20" />
+            </Grid>
+        </Grid>
     </Panel>
 </Window>
