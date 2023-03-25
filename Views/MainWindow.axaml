@@ -18,7 +18,7 @@
     <Panel>
         <Image Width="Infinity"
                Height="Infinity"
-               Source="{Binding GetImage }" />
+               Source="{Binding GetImage}" />
         <Panel HorizontalAlignment="Center" VerticalAlignment="Bottom">
             <Button Content="{Binding ImageTitle}"
                     Command="{Binding PickFile}"
