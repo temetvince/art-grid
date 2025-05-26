@@ -1,0 +1,54 @@
+{
+  "name": "typescript-ui",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run build && webpack-dev-server",
+    "build": "npm run lint && npm run format && tsc && webpack",
+    "lint": "eslint \"src/**/*.{cjs,mjs,js,jsx,ts,tsx,mts,cts}\" --quiet --fix",
+    "format": "prettier --write \"src/**/*.{cjs,mjs,js,jsx,ts,tsx,mts,cts,json,html,css}\"",
+    "update": "ncu -u"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.27.0",
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.27.0",
+    "@types/lodash": "^4.17.16",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.25.1",
+    "html-webpack-plugin": "^5.6.3",
+    "npm-check-updates": "^18.0.1",
+    "prettier": "^3.5.3",
+    "style-loader": "^4.0.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.31.1",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.99.7",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
+  },
+  "dependencies": {
+    "axios": "^1.9.0",
+    "p5": "^2.0.1",
+    "primeicons": "^7.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}

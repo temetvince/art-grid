@@ -1,0 +1,79 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--spacing);
+  min-height: 100vh;
+  padding: var(--spacing);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--spacing);
+  border: var(--border-size) var(--border-style) var(--border-color-alt);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(var(--blur));
+}
+
+.container-row {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  height: min-content;
+  gap: var(--spacing);
+  backdrop-filter: blur(5px);
+}
+
+.container-column {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  height: min-content;
+  gap: var(--spacing);
+  backdrop-filter: blur(5px);
+}
+
+.container-alt {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: var(--spacing-min);
+  border: var(--border-size) var(--border-style) var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-min);
+  backdrop-filter: blur(5px);
+}
+
+.component {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.settings {
+  flex-basis: 33.33%;
+}
+
+.description {
+  flex-basis: 66.67%;
+  padding: var(--spacing-min);
+}
+
+.install-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-less) var(--spacing);
+  border: var(--border-size) var(--border-style) var(--border-color);
+  border-radius: var(--border-radius);
+  width: 100%;
+}

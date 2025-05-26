@@ -1,0 +1,37 @@
+{
+    "title": "Star Wars Mayhem 2",
+    "swm2Alt": "Star Wars Mayhem 2 load screen",
+    "installHeader": "Installation",
+    "installSteam": "X3AP Steam Installation",
+    "installNoSteam": "No-Steam Executable",
+    "installButton": "Install",
+    "installOptional": "Optional Mods to Install",
+    "alaankwa": "Alaankwa",
+    "altFont": "Alternate Font",
+    "featuresHeader": "Features and Enhancements",
+    "features": [
+      {
+        "title": "1. Iconic Star Wars Ships and Factions",
+        "details": [
+          "Star Wars Mayhem 2 introduces a plethora of ships from the Star Wars universe, ranging from nimble starfighters like X-Wings and TIE Fighters to massive capital ships like Star Destroyers and Mon Calamari Cruisers.",
+          "Players can align themselves with various Star Wars factions such as the Rebel Alliance, Galactic Empire, Trade Federation, and more, each with its own unique ships, stations, and missions."
+        ]
+      },
+      {
+        "title": "2. Enhanced Gameplay Mechanics",
+        "details": [
+          "The mod incorporates new gameplay mechanics and improvements on top of Litcube's Universe, enhancing the depth and complexity of the base game.",
+          "Players can engage in large-scale space battles, intricate trade networks, and strategic empire-building, all within the context of the Star Wars universe."
+        ]
+      },
+      {
+        "title": "3. Immersive Universe",
+        "details": [
+          "The universe is richly detailed, featuring familiar Star Wars locations, lore, and characters. This adds a layer of immersion for Star Wars fans, allowing them to experience the galaxy far, far away in a new and interactive way.",
+          "Custom missions and storylines expand on the existing Star Wars lore, offering players new adventures and challenges."
+        ]
+      }
+    ],
+    "description": "Star Wars Mayhem 2 is more than just a mod; it’s a comprehensive overhaul that transforms X3: Albion Prelude into a rich and immersive Star Wars experience. Whether you’re a fan of Star Wars, a veteran of X3, or a newcomer looking for a deep and engaging space simulation, Star Wars Mayhem 2 offers an unparalleled adventure in a galaxy far, far away."
+  }
+  
