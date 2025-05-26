@@ -1,9 +1,0 @@
-.component .settings {
-  border: var(--border-size) var(--border-style) var(--border-color-alt);
-  border-radius: var(--border-radius);
-  padding: var(--spacing);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
