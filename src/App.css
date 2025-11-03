@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 
 :root {
+  --max-width: 1300px;
+  --min-width: 300px;
+
   --font-primary: 'Oswald', sans-serif;
+
+  --text-xl: 2rem;
+  --text-lg: 1.8rem;
+  --text-md: 1.5rem;
+  --text-sm: 1.2rem;
+  --text-xs: 1rem;
 
   --global-light: #cbcdd2;
   --global-dark: #1c1d21;
@@ -11,39 +20,39 @@
   --global-dark-grey: #45474f;
 
   --secondary-color: #4fb4d8;
-  --primary-color: #ef7c2a;
-  --success-color: #78bd65;
-  --danger-color: #eb3d54;
-  --warning-color: #e5cd52;
+  --primary-color: #8c5c15;
+  --success-color: #ef7c2a;
+  --danger-color: #395333;
+  --warning-color: #76a1a5;
 
-  --blur: 1px;
-  --background: #000000;
+  --background: var(--global-darkest);
   --background-alt: var(--global-dark);
-  --text-color: var(--secondary-color);
-  --text-color-alt: var(--primary-color);
+  --text-color: var(--success-color);
+  --text-color-alt: var(--secondary-color);
   --hover-color: var(--text-color-alt);
   --hover-color-alt: var(--text-color);
 
   --box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.45);
   --inset-box-shadow: inset var(--box-shadow);
 
-  --spacing-min: 0.25rem;
-  --spacing-less: 0.5rem;
   --spacing: 1rem;
-  --spacing-more: 1.5rem;
-  --spacing-max: 1.75rem;
+  --spacing-less: 0.25rem;
+  --spacing-more: 3rem;
 
-  --border-radius: 5px;
+  --box-rounding: 5px;
   --border-size: 2px;
   --border-style: solid;
-  --border-color: var(--secondary-color);
-  --border-color-alt: var(--primary-color);
+  --border-color: var(--success-color);
+  --border-color-alt: var(--secondary-color);
+
+  --transition: all 0.2s ease-in-out;
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  min-width: auto;
   margin: 0;
   padding: 0;
   font-weight: normal;
@@ -56,9 +65,7 @@ body {
   transition:
     color 0.5s,
     background-color 0.5s;
-  line-height: var(--spacing-max);
-  font-size: smaller;
-  font-weight: bold;
+  line-height: 1.5;
   font-family:
     var(--font-primary),
     Inter,
@@ -74,6 +81,8 @@ body {
     'Helvetica Neue',
     sans-serif;
   text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   background-image:
     radial-gradient(
       var(--secondary-color),
@@ -81,12 +90,12 @@ body {
       transparent 40px
     ),
     radial-gradient(
-      var(--primary-color),
+      var(--success-color),
       rgba(255, 255, 255, 0.15) 1px,
       transparent 30px
     ),
     radial-gradient(
-      var(--primary-color),
+      var(--success-color),
       rgba(255, 255, 255, 0.1) 2px,
       transparent 40px
     ),
@@ -119,39 +128,12 @@ h1,
 h2,
 h3,
 h4 {
-  text-transform: uppercase;
-  color: var(--text-color-alt);
-}
-
-button {
-  display: inline-block;
-  text-decoration: none;
-  border: var(--border-size) var(--border-style) var(--border-color);
-  background: black;
   color: var(--text-color);
-  border-radius: var(--border-radius);
-  font-weight: bold;
-  font-size: larger;
-  line-height: var(--spacing-more);
-  text-align: center;
-}
-
-button:hover {
-  color: var(--hover-color);
-  border-color: var(--border-color-alt);
 }
 
 a {
-  display: inline-block;
+  color: var(--secondary-color);
   text-decoration: none;
-  border: var(--border-size) var(--border-style) var(--border-color);
-  background: black;
-  color: var(--text-color);
-  border-radius: var(--border-radius);
-  font-weight: bold;
-  font-size: larger;
-  line-height: var(--spacing-more);
-  text-align: center;
 }
 
 a:hover {
@@ -173,14 +155,37 @@ hr {
 
 input,
 textarea {
+  width: 100%;
   background: var(--global-dark);
   color: var(--primary-color);
-  border: var(--border-size) var(--border-style) var(--primary-color);
-  border-radius: var(--border-radius);
-  padding: var(--spacing-less);
-  margin: var(--spacing-less);
+  border: var(--primary-color) var(--border-size) var(--border-style);
+  border-radius: var(--box-rounding);
+  padding: var(--spacing-less) var(--spacing-less);
+  margin: var(--spacing-less) var(--spacing-less);
 }
 
-p {
+button {
+  display: inline-block;
+  text-decoration: none;
+  border: var(--border-size) var(--border-style) var(--border-color);
+  background: var(--background-alt);
+  color: var(--text-color-alt);
+  border-radius: var(--box-rounding);
+  font-weight: bold;
   font-size: larger;
+  line-height: var(--spacing-more);
+  text-align: center;
+  padding: var(--spacing-less) var(--spacing);
+}
+
+button:hover {
+  color: var(--hover-color);
+  border-color: var(--border-color-alt);
+}
+
+.app {
+  min-width: var(--min-width);
+  max-width: var(--max-width);
+  margin: auto;
+  padding: var(--spacing);
 }

@@ -1,0 +1,33 @@
+.image-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grid-square {
+  position: absolute;
+  border: 1px var(--border-style) var(--border-color);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.grid-square span {
+  font-size: 12px;
+  color: black;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 2px 4px;
+  border-radius: var(--box-rounding);
+}
