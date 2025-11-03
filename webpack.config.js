@@ -13,9 +13,9 @@ module.exports = (env, argv) => {
 
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: 'js/[name].[contenthash:8].js',
-      publicPath: '/art-grid/',  // <-- KEY FIX: Matches GitHub sub-path
-      clean: true,
+      filename: 'js/[name].[contenthash:8].js',   // hashed name + folder
+      publicPath: isProd ? '/art-grid/' : '/',    // <-- KEY FIX: Conditional publicPath
+      clean: true,                               // wipe old files on rebuild
     },
 
     target: 'web',
@@ -61,7 +61,7 @@ module.exports = (env, argv) => {
         inject: true,
         // Pass BASE_HREF for <base> tag
         templateParameters: {
-          BASE_HREF: '/art-grid/',  // <-- KEY FIX: Matches sub-path
+          BASE_HREF: isProd ? '/art-grid/' : '/',  // <-- KEY FIX: Conditional BASE_HREF
         },
       }),
     ],

@@ -180,14 +180,27 @@ const ArtGrid: React.FC = () => {
     setMakeSquares(checked);
   };
 
+  // Handle grid dimension changes - reset makeSquares when manually changed
+  const handleGridRowsChange = (rows: number) => {
+    setGridRows(rows);
+    setMakeSquares(false);
+    setPreviousGridSettings({ rows, cols: gridCols });
+  };
+
+  const handleGridColsChange = (cols: number) => {
+    setGridCols(cols);
+    setMakeSquares(false);
+    setPreviousGridSettings({ rows: gridRows, cols });
+  };
+
   return (
     <div className='container'>
       <h1>Art Grid Randomizer</h1>
       <Controls
         gridRows={gridRows}
         gridCols={gridCols}
-        onGridRowsChange={setGridRows}
-        onGridColsChange={setGridCols}
+        onGridRowsChange={handleGridRowsChange}
+        onGridColsChange={handleGridColsChange}
         onImageUpload={handleImageUploadWrapper}
         makeSquares={makeSquares}
         onMakeSquaresChange={imageSrc ? handleMakeSquaresChange : undefined}
