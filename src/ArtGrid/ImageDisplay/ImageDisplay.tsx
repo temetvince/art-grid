@@ -64,7 +64,6 @@ const ImageDisplay: React.FC<DisplayProps> = ({
         style={{
           width: overlayWidth,
           height: overlayHeight,
-          transform: upsideDown ? 'rotate(180deg)' : 'none',
         }}
       >
         {gridSquares.map((square, index) => (
