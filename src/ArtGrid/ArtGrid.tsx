@@ -94,15 +94,9 @@ const ArtGrid: React.FC = () => {
         return;
       }
 
-      // Calculate scale based on displayed image
-      const scaleX = img.clientWidth / img.naturalWidth;
-      const scaleY = img.clientHeight / img.naturalHeight;
-
-      // Set canvas size to scaled square dimensions
-      const scaledWidth = currentSquare.width * scaleX;
-      const scaledHeight = currentSquare.height * scaleY;
-      canvas.width = scaledWidth;
-      canvas.height = scaledHeight;
+      // Set canvas size to original square dimensions for best resolution
+      canvas.width = currentSquare.width;
+      canvas.height = currentSquare.height;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -114,8 +108,8 @@ const ArtGrid: React.FC = () => {
         currentSquare.height,
         0,
         0,
-        scaledWidth,
-        scaledHeight,
+        currentSquare.width,
+        currentSquare.height,
       );
     } else {
       if (!canvasRef.current) {
