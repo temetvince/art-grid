@@ -2,15 +2,21 @@
 
 :root {
   --max-width: 1300px;
-  --min-width: 300px;
+  --min-width: 450px;
 
   --font-primary: 'Oswald', sans-serif;
 
-  --text-xl: 2rem;
-  --text-lg: 1.8rem;
-  --text-md: 1.5rem;
-  --text-sm: 1.2rem;
-  --text-xs: 1rem;
+  --text-xl: 1.5rem;
+  --text-lg: 1.25rem;
+  --text-md: 1rem;
+  --text-sm: 0.75rem;
+  --text-xs: 0.5rem;
+
+  --input-xl: 30rem;
+  --input-lg: 20rem;
+  --input-md: 10rem;
+  --input-sm: 5rem;
+  --input-xs: 2.5rem;
 
   --global-light: #cbcdd2;
   --global-dark: #1c1d21;
@@ -162,6 +168,36 @@ textarea {
   border-radius: var(--box-rounding);
   padding: var(--spacing-less) var(--spacing-less);
   margin: var(--spacing-less) var(--spacing-less);
+}
+
+input::file-selector-button {
+  background: var(--background-alt);
+  color: var(--text-color-alt);
+  border: var(--border-size) var(--border-style) var(--border-color);
+  border-radius: var(--box-rounding);
+  padding: var(--spacing-less) var(--spacing);
+  margin-right: var(--spacing);
+  font-weight: bold;
+}
+
+input::file-selector-button:hover {
+  color: var(--hover-color);
+  border-color: var(--border-color-alt);
+}
+
+input[type='checkbox'] {
+  width: auto;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+input[type='checkbox']:checked {
+  accent-color: var(--secondary-color);
+}
+
+input[type='checkbox']:checked::before {
+  font-weight: bold;
+  color: var(--secondary-color);
 }
 
 button {

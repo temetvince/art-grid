@@ -27,6 +27,7 @@ const ArtGrid: React.FC = () => {
     cols: number;
   } | null>(null);
   const [upsideDown, setUpsideDown] = useState<boolean>(false);
+  const [resizeTrigger, setResizeTrigger] = useState(0);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const scaleRef = useRef<number>(1);
@@ -69,6 +70,9 @@ const ArtGrid: React.FC = () => {
   useEffect(() => {
     const currentSquare = gridSquares[currentIndex];
     if (canvasRef.current && imageSrc) {
+      const img = imageRef.current;
+      if (!img || !img.complete) return;
+
       // Calculate coordinates for drawing without mutating state
       let drawRow = currentSquare.row;
       let drawCol = currentSquare.col;
@@ -90,55 +94,57 @@ const ArtGrid: React.FC = () => {
         return;
       }
 
+      // Calculate scale based on displayed image
+      const scaleX = img.clientWidth / img.naturalWidth;
+      const scaleY = img.clientHeight / img.naturalHeight;
+
       // Set canvas size to scaled square dimensions
-      const scaledWidth = currentSquare.width * scaleRef.current;
-      const scaledHeight = currentSquare.height * scaleRef.current;
+      const scaledWidth = currentSquare.width * scaleX;
+      const scaledHeight = currentSquare.height * scaleY;
       canvas.width = scaledWidth;
       canvas.height = scaledHeight;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.save();
 
-      const img = new Image();
-      img.onload = () => {
-        ctx.drawImage(
-          img,
-          drawX,
-          drawY,
-          currentSquare.width,
-          currentSquare.height,
-          0,
-          0,
-          scaledWidth,
-          scaledHeight,
-        );
-        ctx.restore();
-      };
-      if (img.complete) {
-        ctx.drawImage(
-          img,
-          drawX,
-          drawY,
-          currentSquare.width,
-          currentSquare.height,
-          0,
-          0,
-          scaledWidth,
-          scaledHeight,
-        );
-        ctx.restore();
-      }
-      img.onerror = () => {
-        console.error('Image draw error');
-        alert('Failed to draw image section');
-      };
-      img.src = imageSrc;
+      ctx.drawImage(
+        img,
+        drawX,
+        drawY,
+        currentSquare.width,
+        currentSquare.height,
+        0,
+        0,
+        scaledWidth,
+        scaledHeight,
+      );
     } else {
       if (!canvasRef.current) {
         console.warn('Canvas ref is null'); // Debug
       }
     }
-  }, [currentIndex, gridSquares, imageSrc, upsideDown]);
+  }, [
+    gridSquares,
+    currentIndex,
+    imageSrc,
+    upsideDown,
+    gridRows,
+    gridCols,
+    resizeTrigger,
+  ]);
+
+  // Trigger re-draw when image resizes
+  useEffect(() => {
+    if (imageRef.current) {
+      const img = imageRef.current;
+      const resizeObserver = new ResizeObserver(() => {
+        setResizeTrigger((prev) => prev + 1);
+      });
+      resizeObserver.observe(img);
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }
+  }, [imageSrc]);
 
   // Navigation handlers
   const goPreviousWrapper = () => {
@@ -195,7 +201,7 @@ const ArtGrid: React.FC = () => {
 
   return (
     <div className='container'>
-      <h1>Art Grid Randomizer</h1>
+      <h1 className='title'>Art Grid Randomizer</h1>
       <Controls
         gridRows={gridRows}
         gridCols={gridCols}
@@ -206,17 +212,10 @@ const ArtGrid: React.FC = () => {
         onMakeSquaresChange={imageSrc ? handleMakeSquaresChange : undefined}
         upsideDown={upsideDown}
         onUpsideDownChange={imageSrc ? setUpsideDown : undefined}
+        hasImage={!!imageSrc}
       />
       {imageSrc && gridSquares.length > 0 && (
         <div className='content'>
-          <ImageDisplay
-            imageSrc={imageSrc}
-            gridSquares={gridSquares}
-            scale={scaleRef.current}
-            displayDimensions={displayDimensionsRef.current}
-            imageRef={imageRef}
-            upsideDown={upsideDown}
-          />
           <SquareViewer
             currentIndex={currentIndex}
             gridSquares={gridSquares}
@@ -228,6 +227,12 @@ const ArtGrid: React.FC = () => {
             onJumpRowChange={setJumpRow}
             onJumpColChange={setJumpCol}
             onJumpToSquare={jumpToSquareWrapper}
+          />
+          <ImageDisplay
+            imageSrc={imageSrc}
+            gridSquares={gridSquares}
+            imageRef={imageRef}
+            upsideDown={upsideDown}
           />
         </div>
       )}

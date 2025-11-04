@@ -25,9 +25,28 @@
 }
 
 .grid-square span {
-  font-size: 12px;
+  font-size: var(--text-md);
   color: black;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.4);
   padding: 2px 4px;
   border-radius: var(--box-rounding);
+}
+
+@media (max-width: 1100px) {
+  .grid-square span {
+    font-size : var(--text-sm);
+  }
+}
+
+@media (max-width: 800px) {
+  .grid-square span {
+    padding: 1px 2px;
+    font-size: var(--text-sm);
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-square span {
+    font-size: var(--text-xs);
+  }
 }
