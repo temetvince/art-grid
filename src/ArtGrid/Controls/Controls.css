@@ -37,11 +37,11 @@
   height: var(--input-xs);
 }
 
-.input-group input[type="file"] {
+.input-group input[type='file'] {
   max-width: var(--input-xl);
 }
 
-.input-group input[type="number"] {
+.input-group input[type='number'] {
   width: var(--input-sm);
 }
 

@@ -200,6 +200,19 @@ input[type='checkbox']:checked::before {
   color: var(--secondary-color);
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
 button {
   display: inline-block;
   text-decoration: none;

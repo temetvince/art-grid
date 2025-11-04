@@ -34,7 +34,7 @@
 
 @media (max-width: 1100px) {
   .grid-square span {
-    font-size : var(--text-sm);
+    font-size: var(--text-sm);
   }
 }
 
