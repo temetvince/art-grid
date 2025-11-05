@@ -195,7 +195,7 @@ const ArtGrid: React.FC = () => {
 
   return (
     <div className='container'>
-      <h1 className='title'>Art Grid Randomizer</h1>
+      <h1 className='title'>Art Grid</h1>
       <Controls
         gridRows={gridRows}
         gridCols={gridCols}
@@ -227,6 +227,7 @@ const ArtGrid: React.FC = () => {
             gridSquares={gridSquares}
             imageRef={imageRef}
             upsideDown={upsideDown}
+            currentIndex={currentIndex}
           />
         </div>
       )}

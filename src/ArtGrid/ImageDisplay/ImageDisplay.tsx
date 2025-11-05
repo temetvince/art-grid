@@ -15,6 +15,7 @@ interface DisplayProps {
   gridSquares: GridSquare[];
   imageRef: React.RefObject<HTMLImageElement | null>;
   upsideDown?: boolean;
+  currentIndex: number;
 }
 
 const ImageDisplay: React.FC<DisplayProps> = ({
@@ -22,6 +23,7 @@ const ImageDisplay: React.FC<DisplayProps> = ({
   gridSquares,
   imageRef,
   upsideDown = false,
+  currentIndex,
 }) => {
   const [imageScale, setImageScale] = useState(1);
   const [overlayWidth, setOverlayWidth] = useState(0);
@@ -69,7 +71,7 @@ const ImageDisplay: React.FC<DisplayProps> = ({
         {gridSquares.map((square, index) => (
           <div
             key={index}
-            className='grid-square'
+            className={`grid-square ${index === currentIndex ? 'active-square' : ''}`}
             style={{
               width: square.width * imageScale,
               height: square.height * imageScale,

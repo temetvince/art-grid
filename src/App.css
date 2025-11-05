@@ -222,7 +222,6 @@ button {
   border-radius: var(--box-rounding);
   font-weight: bold;
   font-size: larger;
-  line-height: var(--spacing-more);
   text-align: center;
   padding: var(--spacing-less) var(--spacing);
 }

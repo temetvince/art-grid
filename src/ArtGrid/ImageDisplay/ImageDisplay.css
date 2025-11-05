@@ -16,7 +16,7 @@
 
 .grid-square {
   position: absolute;
-  border: 1px var(--border-style) var(--border-color);
+  border: 1px var(--border-style) var(--global-grey);
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -30,6 +30,11 @@
   background: rgba(255, 255, 255, 0.4);
   padding: 2px 4px;
   border-radius: var(--box-rounding);
+}
+
+.active-square {
+  border-color: var(--global-light);
+  box-shadow: 0 0 5px var(--global-light);
 }
 
 @media (max-width: 1100px) {
