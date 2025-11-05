@@ -8,5 +8,6 @@ painting.
 Run in the browser with:
 
 ```
+$ npm install
 $ npm start
 ```
