@@ -4,7 +4,7 @@
   align-items: center;
   gap: var(--spacing);
   padding: var(--spacing);
-  border: var(--border-size) var(--border-style) var(--border-color);
+  border: var(--border-size) var(--border-style) var(--border-color-alt);
   border-radius: var(--box-rounding);
   background-color: var(--background-alt);
   box-shadow: var(--box-shadow);
@@ -16,11 +16,9 @@
   font-size: 2rem;
   text-align: center;
   width: 100%;
-  border: var(--border-size) var(--border-style) var(--border-color-alt);
   padding: var(--spacing);
   border-radius: var(--box-rounding);
   background-color: var(--background-alt);
-  box-shadow: var(--box-shadow);
   transition: var(--transition);
 }
 
@@ -28,7 +26,7 @@
   display: flex;
   gap: var(--spacing);
   padding: var(--spacing);
-  border: var(--border-size) var(--border-style) var(--border-color-alt);
+  border: var(--border-size) var(--border-style) var(--border-color);
   border-radius: var(--box-rounding);
   background-color: var(--background-alt);
   box-shadow: var(--box-shadow);
